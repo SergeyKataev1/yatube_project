@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}
-{{ title }}
-{% endblock %}
+{% load static %}
 {% block content %}
-  <h1>Основное название: {{ main_header }}</h1>
-  <p>Имя группы: {{ group }}</p>
+  <h1>{% block title %} Записи сообщества {{ group.title }} {% endblock %}</h1>
   <article>
     {% for post in posts %}
       <ul>
         <li>
-          Автор: {{ post.autor.get_full_name }}
+          Автор: {{ post.author.get_full_name }}
         </li>
         <li>
-          Дата: {{ post.pub_date|date:"D E Y" }}
+          Дата публикации: {{ post.pub_date|date:"D E Y" }}
         </li>
       </ul>
     <p>{{post.text}}</p>

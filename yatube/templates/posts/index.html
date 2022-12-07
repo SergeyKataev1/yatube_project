@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} 
-{{ title }} 
-{% endblock %}
-  {% block content %}
-    <h1>Последние обновления</h1>
+{% block content %}
+  <h1>{% block title %}{{ title }}{% endblock %}</h1>
     <article>
       {% for post in posts %}
       <ul>
         <li>
-          Автор: {{ post.autor.get_full_name }}
+          Автор: {{ post.author.get_full_name }}
         </li>
         <li>
-          Дата: {{ post.pub_date|date:"D E Y" }}
+          Дата публикации: {{ post.pub_date|date:"D E Y" }}
         </li>
       </ul>
       <p>{{ post.text }}</p>
@@ -22,4 +19,4 @@
       {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
     </article>
-  {% endblock %}
+{% endblock %}
