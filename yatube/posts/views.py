@@ -1,22 +1,20 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
-from .models import Post
-from .models import Group
- 
- 
+from django.shortcuts import get_object_or_404, render
+
+from .models import Group, Post
+
+
 def index(request):
-    title = 'Последние обновления на сайте'
-    posts = Post.objects.order_by('-pub_date')[:10]
+    title = 'Yatube'
+    posts = Post.objects.order_by('-pub_date')[:20]
     context = {
         'posts': posts,
         'title': title
     }
     return render(request, 'posts/index.html', context)
- 
- 
+
+
 def group_posts(request, slug):
-    title = f'Записи сообщетсва {Group.objects.filter(slug=slug)[0]}'
+    title = Group.objects.filter(slug=slug)[0]
     group = get_object_or_404(Group, slug=slug)
     posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
     context = {
